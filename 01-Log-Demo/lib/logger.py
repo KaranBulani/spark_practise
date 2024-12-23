@@ -1,9 +1,9 @@
 class Log4j:
     def __init__(self, spark):
         log4j = spark._jvm.org.apache.log4j
-        root_class = "guru.learningjournal.spark.examples"#orgName
+        root_class = "guru.learningjournal.spark.examples" #orgName
         conf = spark.sparkContext.getConf()
-        app_name = conf.get("spark.app.name")
+        app_name = conf.get("spark.app.name") #gets from HelloSpark.py
         self.logger = log4j.LogManager.getLogger(root_class +"."+app_name)#+appName
 
     def warn (self, message):

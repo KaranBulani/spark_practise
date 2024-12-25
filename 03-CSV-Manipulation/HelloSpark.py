@@ -19,7 +19,11 @@ if __name__ == "__main__":
 
     logger.info("Starting HelloSpark")
     survey_df = load_survey_df(spark, sys.argv[1])
-    survey_df.show()
+    filtered_survey_df = survey_df.where("Age < 40") \
+        .select("Age", "Gender", "Country", "state")
+    grouped_df = filtered_survey_df.groupBy("Country")
+    count_df = grouped_df.count()
+    count_df.show()
 
 
     logger.info("Finished HelloSpark")

@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-
+from pyspark.sql.functions import expr
 from lib.logger import Log4j
 
 if __name__ == "__main__":
@@ -40,8 +40,10 @@ if __name__ == "__main__":
     join_expr = order_df.prod_id == product_df.prod_id
     product_renamed_df = product_df.withColumnRenamed("qty", "reorder_qty")
 
-    order_df.join(product_renamed_df, join_expr, "outer") \
+    order_df.join(product_renamed_df, join_expr, "left") \
     .drop(product_renamed_df.prod_id) \
-    .select("*") \
+    .select("order_id", "prod_id", "prod_name", "unit_price", "list_price", "qty") \
+    .withColumn("prod_name", expr("coalesce(prod_name, prod_id)")) \
+    .withColumn("list_price", expr("coalesce(list_price, unit_price)")) \
     .sort("order_id") \
     .show()

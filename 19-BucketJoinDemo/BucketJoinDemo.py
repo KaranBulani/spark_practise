@@ -11,7 +11,7 @@ if __name__ == "__main__":
     .getOrCreate()
 
     logger = Log4j(spark)
-
+    '''
     df1 = spark.read.json("data/d1/")
     df2 = spark.read.json("data/d2/")
 
@@ -30,3 +30,14 @@ if __name__ == "__main__":
         .bucketBy(3, "id") \
         .mode("overwrite") \
         .saveAsTable("MY_DB.flight_data2")
+    '''
+
+    df3 = spark.read.table("MY_DB.flight_data1")
+    df4 = spark.read.table("MY_DB.flight_data2")
+
+    spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
+    join_expr = df3.id == df4.id
+    join_df = df3.join(df4, join_expr, "inner")
+
+    join_df.collect()
+    input("press a key to stop...")

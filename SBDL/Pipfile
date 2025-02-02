@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pyspark = "*"
+pytest = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
+#A Pipfile is used by Pipenv (a Python dependency management tool) to specify project dependencies, Python version requirements, and package sources. It replaces the traditional requirements.txt and combines dependency resolution with virtual environment management. Here's a breakdown of each section:
+#1. [[source]]
+#   - url = https://pypi.org/simple → Specifies that packages should be installed from the Python Package Index (PyPI).
+#   - verify_ssl = true → Ensures SSL verification for secure package downloads.
+#   - name = pypi → Names the source (useful if multiple sources are listed).
+#2. [packages]
+#   - Lists the dependencies required for the project.
+#   - pyspark =  → Installs the latest version of PySpark.
+#   - pytest =  → Installs the latest version of Pytest (used for testing).
+#3. [dev-packages]
+#   - This section is empty, but it's meant for development dependencies (e.g., linters, formatters, debuggers).
+#4. [requires]
+#   - python_version = 3.10 → Specifies that Python 3.10 is required for this environment.

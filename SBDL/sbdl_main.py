@@ -1,5 +1,5 @@
 import sys
-from venv import logger
+#from venv import logger
 
 from lib import Utils
 from lib.logger import Log4j

@@ -1,4 +1,3 @@
-class Log4j(object):
 '''
 * spark._jvm gives access to the underlying JVM from PySpark.
 * org.apache.log4j is the Log4j logging library in Java.
@@ -8,6 +7,7 @@ class Log4j(object):
 * This logger can now be used to log messages at different levels (warn, info, error, debug).
 * self.logger stores this logger instance for use in the other methods of the class.
 '''
+class Log4j(object):
     def __init__(self, spark):
         log4j = spark._jvm.org.apache.log4j
         self.logger = log4j.LogManager.getLogger("sbdl")

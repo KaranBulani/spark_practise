@@ -10,7 +10,7 @@ pytest = "*"
 [dev-packages]
 
 [requires]
-python_version = "3.10"
+python_version = "3.11"
 #A Pipfile is used by Pipenv (a Python dependency management tool) to specify project dependencies, Python version requirements, and package sources. It replaces the traditional requirements.txt and combines dependency resolution with virtual environment management. Here's a breakdown of each section:
 #1. [[source]]
 #   - url = https://pypi.org/simple → Specifies that packages should be installed from the Python Package Index (PyPI).

@@ -20,4 +20,4 @@ def spark():
 
 def test_blank_tes(spark):
     print(spark.version)
-    assert spark.version == "3.3.0"
+    assert spark.version == "3.4.3"

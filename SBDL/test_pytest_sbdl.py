@@ -3,6 +3,7 @@ from datetime import datetime, date
 from chispa import assert_basic_rows_equality, assert_df_equality
 
 from pyspark.sql.types import Row, StructType, StructField, StringType, NullType, ArrayType, TimestampType, DateType
+from pyspark.sql.functions import col
 
 from SBDL.lib import DataLoader, Transformations
 from lib.ConfigLoader import get_config
@@ -177,7 +178,7 @@ def expected_final_df(spark):
                                                                           StructField('addressStartDate', DateType())
                                                                           ])),
                                                                  StructField('oldValue', NullType())]))])))]))])
-    return spark.read.format("json").schema(schema).load("test_data/results/final_df.json").select("keys", "payload")
+    return spark.read.format("json").schema(schema).load("test_data/results/final_df.json").select("keys", "payload").orderBy(col("keys")[0]["keyValue"])
 
 def test_blank_test(spark):
     print(spark.version)
@@ -223,5 +224,5 @@ def test_kafka_kv_df(spark, expected_final_df):
     party_address_df = Transformations.join_party_address(relations_df, relation_address_df)
     data_df = Transformations.join_contract_party(contract_df, party_address_df)
     actual_final_df = Transformations.apply_header(spark, data_df) \
-        .select("keys", "payload")
-    assert actual_final_df.collect() == expected_final_df.collect()
+        .select("keys", "payload").orderBy(col("keys")[0]["keyValue"])
+    assert_basic_rows_equality(actual_final_df.collect(), expected_final_df.collect()) #ignores_schema

@@ -20,9 +20,9 @@ spark-submit
 	spark.conf → Contains Spark-related configurations.
 	log4j.properties → Used for logging configuration.
 DRIVER CONFIGS
-	--driver-cores 2 \
-	--driver-memory 3G \
-	--conf spark.driver.memoryOverhead=1G
+	--driver-cores 2 The spark.driver.cores configuration is given as
+	--driver-memory 3G The spark.driver.memory is given as
+	--conf spark.driver.memoryOverhead=1G The spark.driver.memoryOverhead is given as
 sbdl_main.py qa 2022-08-02
 	sbdl_main.py → The main Python script that Spark will execute.
 	qa → A command-line argument (could specify an environment like QA, prod, or dev).

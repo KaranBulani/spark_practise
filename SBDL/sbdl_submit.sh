@@ -1,6 +1,9 @@
 spark-submit --master yarn --deploy-mode cluster \
 --py-files sdbl_lib.zip \
 --files conf/sdbl.conf,conf/spark.conf,log4j.properties \
+--driver-cores 2 \
+--driver-memory 3G \
+--conf spark.driver.memoryOverhead=1G
 sbdl_main.py qa 2022-08-02
 : '
 spark-submit
@@ -16,6 +19,10 @@ spark-submit
 	sdbl.conf → Likely contains job-specific configurations.
 	spark.conf → Contains Spark-related configurations.
 	log4j.properties → Used for logging configuration.
+DRIVER CONFIGS
+	--driver-cores 2 \
+	--driver-memory 3G \
+	--conf spark.driver.memoryOverhead=1G
 sbdl_main.py qa 2022-08-02
 	sbdl_main.py → The main Python script that Spark will execute.
 	qa → A command-line argument (could specify an environment like QA, prod, or dev).
